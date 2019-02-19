@@ -12,9 +12,8 @@ RUN sudo apt-get update && \
 
 # Install Ruby and dependencies
 RUN sudo apt-get install make zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev \
-                         libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev \
-                         libffi-dev default-libmysqlclient-dev libpq-dev rsync imagemagick \
-                         chromedriver && \
+    libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev \
+    libffi-dev default-libmysqlclient-dev libpq-dev rsync imagemagick && \
     wget http://ftp.ruby-lang.org/pub/ruby/2.5/ruby-2.5.1.tar.gz && \
     tar -xzvf ruby-2.5.1.tar.gz && \
     cd ruby-2.5.1 && \
@@ -25,6 +24,12 @@ RUN sudo apt-get install make zlib1g-dev build-essential libssl-dev libreadline-
     rm -rf ruby-2.5.1 && \
     rm ruby-2.5.1.tar.gz && \
     sudo gem install bundler
+
+# Chromedriver
+RUN wget https://chromedriver.storage.googleapis.com/2.45/chromedriver_linux64.zip && \
+    unzip -o chromedriver_linux64.zip && \
+    sudo rm chromedriver_linux64.* && \
+    sudo mv chromedriver /usr/local/bin/chromedriver
 
 # Add CircleCI deploy and testing tools
 RUN wget https://raw.githubusercontent.com/bellkev/circle-lock-test/02d45b47f8bf8e6009aa7fca9e9a7257a77a0404/do-exclusively && \
