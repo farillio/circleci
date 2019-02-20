@@ -145,17 +145,6 @@ RUN wget https://raw.githubusercontent.com/bellkev/circle-lock-test/02d45b47f8bf
     cp do-exclusively /usr/local/bin
 
 ###############################################################################
-# Chrome
-#
-RUN curl --silent --show-error --location --fail --retry 3 --output /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-    && (dpkg -i /tmp/google-chrome-stable_current_amd64.deb || apt-get -fy install)  \
-    && rm -rf /tmp/google-chrome-stable_current_amd64.deb \
-    && sed -i 's|HERE/chrome"|HERE/chrome" --disable-setuid-sandbox --no-sandbox|g' \
-    "/opt/google/chrome/google-chrome"
-
-ENV PATH=/opt/google/chrome:$PATH
-
-###############################################################################
 # Chromedriver
 #
 RUN export CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 http://chromedriver.storage.googleapis.com/LATEST_RELEASE) \
@@ -169,7 +158,7 @@ RUN export CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 http://chrome
 ###############################################################################
 # Other bits and pieces
 #
-RUN apt-get install -y jq netcat
+RUN apt-get install -y chromium-browser jq netcat
 
 ###############################################################################
 # Comrak
