@@ -149,8 +149,8 @@ RUN wget https://raw.githubusercontent.com/bellkev/circle-lock-test/02d45b47f8bf
 #
 RUN wget https://chromedriver.storage.googleapis.com/2.45/chromedriver_linux64.zip && \
     unzip -o chromedriver_linux64.zip && \
-    sudo mv chromedriver /usr/local/bin/chromedriver && \
-    sudo rm chromedriver_linux64.* && \
+    mv chromedriver /usr/local/bin/chromedriver && \
+    rm chromedriver_linux64.* && \
 
 ###############################################################################
 # Other bits and pieces
