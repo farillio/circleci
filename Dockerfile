@@ -147,7 +147,7 @@ RUN curl https://sh.rustup.rs -sSf | \
 
 ENV PATH=/root/.cargo/bin:$PATH
 
-# Build comrak
-RUN . $HOME/.cargo/env && cd /tmp && git clone https://github.com/kivikakk/comrak.git && cd comrak && cargo build --release
+# Build and install comrak
+RUN . $HOME/.cargo/env && cd /tmp && git clone https://github.com/kivikakk/comrak.git && cd comrak && cargo build --release && cargo install
 
 CMD [ "/bin/bash" ]
