@@ -145,6 +145,13 @@ RUN wget https://raw.githubusercontent.com/bellkev/circle-lock-test/02d45b47f8bf
     cp do-exclusively /usr/local/bin
 
 ###############################################################################
+# Chromedriver
+#
+RUN wget https://chromedriver.storage.googleapis.com/2.45/chromedriver_linux64.zip && \
+    unzip -o chromedriver_linux64.zip && \
+    sudo rm chromedriver_linux64.* && \
+
+###############################################################################
 # Other bits and pieces
 #
 RUN apt-get install -y jq netcat
