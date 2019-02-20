@@ -113,7 +113,7 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 #
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y nodejs libssl1.0-dev nodejs-dev node-gyp npm jq postgresql-client netcat
+    apt-get install -y nodejs libssl1.0-dev nodejs-dev node-gyp npm
 
 ###############################################################################
 # AWS CLI
@@ -133,7 +133,9 @@ RUN pip install boto3
 # Postgres Client
 #
 RUN wget http://apt.postgresql.org/pub/repos/apt/pool/9.6/p/postgresql-9.6/postgresql-client-9.6_9.6~rc1-1.pgdg15.10%2b1_amd64.deb
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata && apt-get install -y postgresql-client-common && dpkg -i postgresql-client-9.6_9.6~rc1-1.pgdg15.10+1_amd64.deb
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata && \
+    apt-get install -y postgresql-client-common && \
+    dpkg -i postgresql-client-9.6_9.6~rc1-1.pgdg15.10+1_amd64.deb
 
 ###############################################################################
 # Add CircleCI deploy and testing tools
@@ -145,7 +147,7 @@ RUN wget https://raw.githubusercontent.com/bellkev/circle-lock-test/02d45b47f8bf
 ###############################################################################
 # Other bits and pieces
 #
-RUN apt-get install -y jq
+RUN apt-get install -y jq netcat
 
 ###############################################################################
 # Comrak
@@ -157,6 +159,9 @@ RUN curl https://sh.rustup.rs -sSf | \
 ENV PATH=/root/.cargo/bin:$PATH
 
 # Build and install comrak
-RUN . $HOME/.cargo/env && cd /tmp && git clone https://github.com/kivikakk/comrak.git && cd comrak && cargo build --release && cargo install
+RUN . $HOME/.cargo/env && \
+    cd /tmp && \
+    git clone https://github.com/kivikakk/comrak.git && \
+    cd comrak && cargo build --release && cargo install
 
 CMD [ "/bin/bash" ]
