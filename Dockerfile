@@ -119,6 +119,8 @@ RUN apt-get update && \
 # Ansible
 #
 RUN pip install ansible
+RUN pip install botocore
+RUN pip install boto3
 
 ###############################################################################
 # Postgres Client
