@@ -109,6 +109,13 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 	&& chmod 777 "$GEM_HOME" "$BUNDLE_BIN"
 
 ###############################################################################
+# Node
+#
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y nodejs libssl1.0-dev nodejs-dev node-gyp npm jq postgresql-client netcat
+
+###############################################################################
 # AWS CLI
 #
 RUN apt-get update && \
