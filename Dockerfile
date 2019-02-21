@@ -176,4 +176,6 @@ RUN . $HOME/.cargo/env && \
     git clone https://github.com/kivikakk/comrak.git && \
     cd comrak && cargo build --release && cargo install
 
+WORKDIR /root
+
 CMD [ "/bin/bash" ]
