@@ -1,4 +1,4 @@
-# circleci-image
+# circleci
 
 Image building is performed automatically by [DockerHub](https://hub.docker.com/?namespace=farillio) upon commits to `master`.
 
