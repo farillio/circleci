@@ -158,7 +158,8 @@ RUN export CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 http://chrome
 ###############################################################################
 # Other bits and pieces
 #
-RUN apt-get install -y nginx chromium-browser jq netcat rsync
+RUN apt-get update && \
+    apt-get install -y nginx chromium-browser jq netcat rsync
 
 ###############################################################################
 # Comrak
