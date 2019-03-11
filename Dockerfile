@@ -113,7 +113,7 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 #
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y nodejs libssl1.0-dev nodejs-dev node-gyp npm
+    apt-get install -y nodejs libssl1.0-dev nodejs-dev node-gyp npm yarn
 
 ###############################################################################
 # AWS CLI
