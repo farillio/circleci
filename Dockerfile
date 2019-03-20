@@ -40,10 +40,6 @@ RUN mkdir -p $LEIN_INSTALL \
 ENV PATH=$PATH:$LEIN_INSTALL
 ENV LEIN_ROOT 1
 
-# Install clojure 1.10.0 so it doesn't have to be downloaded every time
-RUN echo '(defproject dummy "" :dependencies [[org.clojure/clojure "1.10.0"]])' > project.clj \
-  && lein deps && rm project.clj
-
 ###############################################################################
 # Ruby/Bundler
 #
@@ -159,7 +155,7 @@ RUN export CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 http://chrome
 # Other bits and pieces
 #
 RUN apt-get update && \
-    apt-get install -y nginx chromium-browser jq netcat rsync vim net-tools
+    apt-get install -y nginx chromium-browser jq netcat rsync vim net-tools lsof
 
 ###############################################################################
 # Comrak
