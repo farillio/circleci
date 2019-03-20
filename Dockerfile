@@ -22,6 +22,10 @@ ENV LEIN_INSTALL=/usr/local/bin/
 
 WORKDIR /tmp
 
+# https://github.com/inversepath/usbarmory-debian-base_image/issues/9#issuecomment-451635505
+RUN mkdir ~/.gnupg
+RUN echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf
+
 RUN mkdir -p $LEIN_INSTALL \
   && wget -q https://raw.githubusercontent.com/technomancy/leiningen/$LEIN_VERSION/bin/lein-pkg \
   && echo "Comparing lein-pkg checksum ..." \
