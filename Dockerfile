@@ -30,6 +30,9 @@ ENV NVM_DIR /home/circleci/.nvm
 
 RUN . ~/.nvm/nvm.sh && nvm install $NODE_VERSION && nvm alias default $NODE_VERSION
 
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
 ###############################################################################
 # Postgres Client
 #
