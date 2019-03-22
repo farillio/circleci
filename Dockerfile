@@ -74,4 +74,14 @@ RUN . /home/circleci/.cargo/env && \
 #
 RUN sudo apt-get install -y imagemagick
 
+###############################################################################
+# Nginx
+#
+RUN sudo apt-get install -y nginx
+
+###############################################################################
+# Misc extras
+#
+RUN sudo apt-get install -y vim
+
 CMD [ "/bin/bash" ]
