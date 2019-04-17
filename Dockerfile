@@ -82,6 +82,6 @@ RUN sudo apt-get install -y nginx
 ###############################################################################
 # Misc extras
 #
-RUN sudo apt-get install -y lsof vim
+RUN sudo apt-get install -y lsof vim ssh rsync
 
 CMD [ "/bin/bash" ]
