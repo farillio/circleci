@@ -84,4 +84,12 @@ RUN sudo apt-get install -y nginx
 #
 RUN sudo apt-get install -y lsof vim ssh rsync
 
+###############################################################################
+# Make locale the same as Circle CI machine executors
+# If they are not the same - collation issues interface with cache keys
+#
+RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
+    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+ENV LANG en_US.utf8
+
 CMD [ "/bin/bash" ]
