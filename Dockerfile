@@ -41,6 +41,10 @@ RUN mkdir -p $LEIN_INSTALL \
   && mkdir -p /usr/share/java \
   && mv leiningen-$LEIN_VERSION-standalone.zip /usr/share/java/leiningen-$LEIN_VERSION-standalone.jar
 
+RUN curl -O https://download.clojure.org/install/linux-install-1.10.1.447.sh \
+  && chmod +x linux-install-1.10.1.447.sh \
+  && ./linux-install-1.10.1.447.sh
+
 ENV PATH=$PATH:$LEIN_INSTALL
 ENV LEIN_ROOT 1
 
