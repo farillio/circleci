@@ -34,6 +34,7 @@ RUN sudo apt-get update  \
     bundler \
     python-pip \
     vim \
+    rlwrap \
     ssh \
     && sudo apt-get install --no-install-recommends yarn \
     && sudo apt-get clean \
