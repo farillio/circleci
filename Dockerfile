@@ -40,6 +40,13 @@ RUN sudo apt-get update  \
     && sudo rm -rf /var/lib/apt/lists/*
 
 ###############################################################################
+# clj tool
+#
+RUN curl -O https://download.clojure.org/install/linux-install-1.10.1.447.sh \
+    && chmod +x linux-install-1.10.1.447.sh
+RUN sudo ./linux-install-1.10.1.447.sh
+
+###############################################################################
 # Make locale the same as Circle CI machine executors
 # If they are not the same - collation issues interface with cache keys
 #
