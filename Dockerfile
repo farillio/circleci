@@ -29,9 +29,6 @@ RUN sudo apt-get update  \
     libpq-dev \
     postgresql-client-common \
     zlib1g-dev \
-    ruby \
-    ruby-dev \
-    bundler \
     python-pip \
     vim \
     rlwrap \
@@ -39,6 +36,18 @@ RUN sudo apt-get update  \
     && sudo apt-get install --no-install-recommends yarn \
     && sudo apt-get clean \
     && sudo rm -rf /var/lib/apt/lists/*
+
+###############################################################################
+# Ruby
+#
+RUN sudo apt install gnupg2
+RUN curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
+RUN curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import -
+RUN curl -L https://get.rvm.io | bash -s stable
+RUN /bin/bash -l -c "rvm requirements"
+RUN /bin/bash -l -c "rvm install 2.6.3"
+RUN /bin/bash -l -c "rvm --default use 2.6.3"
+RUN /bin/bash -l -c "gem install bundler"
 
 ###############################################################################
 # clj tool
