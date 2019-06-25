@@ -48,6 +48,7 @@ RUN /bin/bash -l -c "rvm requirements"
 RUN /bin/bash -l -c "rvm install 2.6.3"
 RUN /bin/bash -l -c "rvm --default use 2.6.3"
 RUN /bin/bash -l -c "gem install bundler"
+RUN echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"' >> ~/.bashrc
 
 ###############################################################################
 # clj tool
