@@ -1,5 +1,5 @@
 # https://circleci.com/docs/2.0/circleci-images/
-FROM circleci/clojure:openjdk-8-lein-2.9.1-browsers
+FROM circleci/clojure:openjdk-11-lein-2.9.1-browsers
 
 WORKDIR /home/circleci
 
@@ -17,7 +17,6 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/so
 
 RUN sudo apt-get update  \
     && sudo apt-get install -y \
-    openjdk-8-jdk \
     wget \
     gnupg2 \
     imagemagick \
