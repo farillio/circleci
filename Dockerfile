@@ -55,6 +55,7 @@ ENV RUBY_VERSION=2.6.1
 ENV RUBY_DOWNLOAD_SHA256=17024fb7bb203d9cf7a5a42c78ff6ce77140f9d083676044a7db67f1e5191cb8
 ENV RUBYGEMS_VERSION=3.0.2
 ENV BUNDLER_VERSION=1.13.6
+ENV RAKE_VERSION=12.3.3
 
 RUN set -ex \
     && apt-get update \
@@ -101,6 +102,9 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 
 # Bundler
 RUN gem install bundler -v "$BUNDLER_VERSION"
+
+# Rake
+RUN gem install rake -v "$RAKE_VERSION"
 
 ###############################################################################
 # clj tool
