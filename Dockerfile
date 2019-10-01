@@ -6,16 +6,14 @@ WORKDIR /home/circleci
 ###############################################################################
 # Packages
 #
-RUN sudo apt-get update  \
-    && sudo apt-get upgrade -y \
-    && sudo apt-get install -y \
-    apt-transport-https \
-    ca-certificates
-
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
-RUN sudo apt-get update  \
+RUN sudo apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    && sudo apt-get update  \
+    && sudo apt-get upgrade -y \
     && sudo apt-get install -y \
     openjdk-8-jdk \
     wget \
@@ -28,11 +26,26 @@ RUN sudo apt-get update  \
     libpq5 \
     libpq-dev \
     postgresql-client-common \
+    mysql-client \
     zlib1g-dev \
     python-pip \
     vim \
     rlwrap \
     ssh \
+    autoconf \
+    bison \
+    build-essential \
+    libssl-dev \
+    libyaml-dev \
+    libreadline6-dev \
+    zlib1g-dev \
+    libncurses5-dev \
+    libffi-dev \
+    libgdbm-dev \
+    && wget http://apt.postgresql.org/pub/repos/apt/pool/9.6/p/postgresql-9.6/postgresql-client-9.6_9.6~rc1-1.pgdg15.10%2b1_amd64.deb \
+    && DEBIAN_FRONTEND=noninteractive sudo apt-get install -y tzdata \
+    && sudo dpkg -i postgresql-client-9.6_9.6~rc1-1.pgdg15.10+1_amd64.deb \
+    && sudo rm -rf postgresql-client-9.6_9.6~rc1-1.pgdg15.10+1_amd64.deb \
     && sudo apt-get install --no-install-recommends yarn \
     && sudo apt-get clean \
     && sudo rm -rf /var/lib/apt/lists/*
@@ -58,10 +71,6 @@ ENV BUNDLER_VERSION=1.13.6
 ENV RAKE_VERSION=12.3.3
 
 RUN set -ex \
-    && apt-get update \
-    && apt-get install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
-	&& rm -rf /var/lib/apt/lists/* \
-	\
 	&& wget -O ruby.tar.gz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.gz" \
 	&& echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.gz" | sha256sum -c - \
 	\
@@ -82,7 +91,6 @@ RUN set -ex \
 	&& make -j"$(nproc)" \
 	&& make install \
 	\
-	&& apt-get purge -y --auto-remove $buildDeps \
 	&& cd / \
 	&& rm -r /usr/src/ruby \
 	\
@@ -137,14 +145,6 @@ RUN . ~/.nvm/nvm.sh && nvm install $NODE_VERSION && nvm alias default $NODE_VERS
 
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
-
-###############################################################################
-# Postgres Client
-#
-RUN wget http://apt.postgresql.org/pub/repos/apt/pool/9.6/p/postgresql-9.6/postgresql-client-9.6_9.6~rc1-1.pgdg15.10%2b1_amd64.deb
-RUN DEBIAN_FRONTEND=noninteractive sudo apt-get install -y tzdata && \
-    sudo dpkg -i postgresql-client-9.6_9.6~rc1-1.pgdg15.10+1_amd64.deb && \
-    sudo rm -rf postgresql-client-9.6_9.6~rc1-1.pgdg15.10+1_amd64.deb
 
 ###############################################################################
 # Comrak
