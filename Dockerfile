@@ -19,7 +19,6 @@ RUN sudo apt-get install -y \
     gnupg2 \
     imagemagick \
     locales \
-    lsof \
     nginx \
     rsync \
     libpq5 \
