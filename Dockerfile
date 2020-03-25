@@ -125,7 +125,7 @@ RUN sudo pip install awscli
 #
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
-ENV NODE_VERSION 8.15.0
+ENV NODE_VERSION 12.3.1
 ENV NVM_DIR /home/circleci/.nvm
 
 RUN . ~/.nvm/nvm.sh && nvm install $NODE_VERSION && nvm alias default $NODE_VERSION
