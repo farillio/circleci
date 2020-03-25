@@ -41,13 +41,17 @@ RUN sudo apt-get install -y \
     libncurses5-dev \
     libffi-dev \
     libgdbm-dev \
-    && wget http://apt.postgresql.org/pub/repos/apt/pool/9.6/p/postgresql-9.6/postgresql-client-9.6_9.6~rc1-1.pgdg15.10%2b1_amd64.deb \
-    && DEBIAN_FRONTEND=noninteractive sudo apt-get install -y tzdata \
-    && sudo dpkg -i postgresql-client-9.6_9.6~rc1-1.pgdg15.10+1_amd64.deb \
-    && sudo rm -rf postgresql-client-9.6_9.6~rc1-1.pgdg15.10+1_amd64.deb \
     && sudo apt-get install --no-install-recommends yarn \
     && sudo apt-get clean \
     && sudo rm -rf /var/lib/apt/lists/*
+
+###############################################################################
+# Postgresql
+#
+RUN sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" >>/etc/apt/sources.list.d/pgdg.list' \
+    && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - \
+    && sudo apt-get update \
+    && sudo apt-get install postgresql-client-9.6
 
 ###############################################################################
 # Ruby/Bundler (as root)
