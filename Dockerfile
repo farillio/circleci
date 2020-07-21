@@ -164,4 +164,6 @@ RUN . /home/circleci/.cargo/env && \
     git clone https://github.com/kivikakk/comrak.git && \
     cd comrak && cargo build --release && cargo install
 
+RUN curl -s https://raw.githubusercontent.com/borkdude/babashka/master/install
+
 CMD [ "/bin/bash" ]
